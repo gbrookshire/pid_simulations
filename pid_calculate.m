@@ -1,8 +1,6 @@
-% Partial Information Decomposition (Gaussian copula)
-% Adapted from code by Hyojin Park
+% Testing out the PID (Partial Information Decomposition)
 
-addpath('~/rds_share/gb/sketchpad/pid/')
-
+addpath('~/rds_share/gb/projects/pid_simulations')
 addpath('~/Documents/MATLAB/partial-info-decomp-master')
 addpath('~/Documents/MATLAB/gcmi-master/matlab')
 
@@ -13,7 +11,7 @@ clear variables
 % Load the preprocessed data
 % cfg = FILL_IN;
 % data = ft_preprocessing(cfg);
-simulate_pid
+pid_simulate
 
 % Append all EEG data into one long trial
 eeg_raw = cat(2, data.trial{:});
@@ -102,7 +100,7 @@ for pid_type = {'gc' 'disc'}
         xticklabels(data.label)
         title(info_types{info_type})
     end
-    print('-dpng', ['pid1-' pid_type{1}])
+    print('-dpng', ['plots/' pid_type{1} '-by-infotype'])
 
     % Group into a different subplot for each channel
     figure(2)
@@ -116,6 +114,6 @@ for pid_type = {'gc' 'disc'}
         xticklabels(info_labels)
         title(data.label{i_chan})
     end
-    print('-dpng', ['pid2-' pid_type{1}])
+    print('-dpng', ['plots/' pid_type{1} '-by-channel'])
   
 end
