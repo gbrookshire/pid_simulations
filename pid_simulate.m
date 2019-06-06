@@ -19,28 +19,28 @@ data.trial = {};
 
 % Make signals that influence the MEEG data
 noise = @(amp) amp * detrend(rand(size(t)));
-s_shared = noise(0);
+s_shared = noise(0); % Set the amount of redundant information
 s_a = s_shared + noise(1);
 s_b = s_shared + noise(1);
 
-% Make the MEEG data, influenced by the two signals
-% Give different channels different PID profiles
+% Make the dependent variables, influenced by the two signals
+% Different channels are composed of different combinations of the signals
 n_chans = 6;
 for i_chan = 1:n_chans
     switch i_chan
-        case 1 % Only depends on one signal
+        case 1 % Only depends on signal A
             x = s_a;
             label = 'A';
-        case 2 % Only depends on the sawtooth wave
+        case 2 % Only depends on signal B
             x = s_b;
             label = 'B';
-        case 3 % Two signals added together
+        case 3 % Depends on the two signals added together
             x = s_a + s_b;
             label = 'A+B';
-        case 4 % Redundant signals
+        case 4 % Noise (no relation to either signal)
             x = noise(1);
-            label = 'N';
-        case 5 % Non-monotonic relationship on one variable
+            label = 'Noise';
+        case 5 % Non-monotonic dependence on one variable
             x = (s_a) .^ 2;
             label = 'A^2';
         case 6 % XOR is the typical example of synergistic info
@@ -54,7 +54,7 @@ for i_chan = 1:n_chans
     data.label{end+1} = label;
 end
 
-% Include the IVs in the MEEG data
+% Include the IVs in the data
 data.trial{1}(end + 1, :) = s_b;
 data.label{end + 1} = 's_b';
 data.trial{1}(end + 1, :) = s_a;
