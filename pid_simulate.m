@@ -19,7 +19,7 @@ data.trial = {};
 
 % Make signals that influence the MEEG data
 noise = @(amp) amp * detrend(rand(size(t)));
-s_shared = noise(0); % Set the amount of redundant information
+s_shared = noise(0); % Set the amount of redundant information here
 s_a = s_shared + noise(1);
 s_b = s_shared + noise(1);
 

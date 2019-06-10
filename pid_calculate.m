@@ -6,15 +6,15 @@ addpath('~/Documents/MATLAB/gcmi-master/matlab')
 
 clear variables
 
-% Find the PID between model output and raw EEG
+if ~exist('plots', 'dir')
+    error('Create a directory called ''plots/'' to save the output.')
+end
 
-% Load the preprocessed data
-% cfg = FILL_IN;
-% data = ft_preprocessing(cfg);
-pid_simulate
+% Find the PID
+pid_simulate % Creates the 'data' object
 
-% Append all EEG data into one long trial
-eeg_raw = cat(2, data.trial{:});
+% Prep the data
+eeg_raw = cat(2, data.trial{:}); % Append all EEG data into one long trial
 eeg_raw = eeg_raw'; % Transpose so this works with copnorm
 
 % Make the data for the two models
