@@ -53,15 +53,15 @@ for pid_type = {'gc' 'disc'}
             
         case 'disc' % Discrete Info
             % Make discrete (binned) versions of each variable
-            nbins = 20;
-            model1_disc = discretize(model1_raw, nbins);
-            model2_disc = discretize(model2_raw, nbins);
+            nbins = 4;
+            model1_disc = discrete(model1_raw, nbins);
+            model2_disc = discrete(model2_raw, nbins);
             for i_chan = 1:size(eeg_raw, 2)
-                eeg_disc(:, i_chan) = discretize(eeg_raw(:, i_chan), nbins);
+                eeg_disc(:, i_chan) = discrete(eeg_raw(:, i_chan), nbins);
             end
 
             % Calculate PID for each sensor
-            for i_chan = 1:size(eeg_cop, 2)
+            for i_chan = 1:size(eeg_disc, 2)
                 dat = [model1_disc model2_disc eeg_disc(:, i_chan)];
 
                 % Joint distributions
