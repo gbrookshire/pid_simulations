@@ -1,5 +1,6 @@
 % Testing out the PID (Partial Information Decomposition)
 
+cd('~/rds_share/gb/projects/pid_simulations')
 addpath('~/rds_share/gb/projects/pid_simulations')
 addpath('~/Documents/MATLAB/partial-info-decomp-master')
 addpath('~/Documents/MATLAB/gcmi-master/matlab')
@@ -69,8 +70,8 @@ for pid_type = {'gc' 'disc'}
 
                 % PID
                 lat = lattice2d();
-                res = calc_pi(lat, Pxxy, @Imin);
-%                 res = calc_pi(lat, Pxxy, @Iccs); % Causes python to crash
+%                 res = calc_pi(lat, Pxxy, @Imin);
+                res = calc_pi(lat, Pxxy, @Iccs); % Causes python to crash
 
                 info = res.PI;
                 I(1, i_chan) = info(1); % Redundancy
