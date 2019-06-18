@@ -18,7 +18,7 @@ data.time = {t};
 data.trial = {};
 
 % Make signals that influence the MEEG data
-noise = @(amp) amp * detrend(rand(size(t)));
+noise = @(amp) amp * awgn(zeros(size(t)), 1); % Gaussian noise
 s_shared = noise(0); % Set the amount of redundant information here
 s_a = s_shared + noise(1);
 s_b = s_shared + noise(1);
